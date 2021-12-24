@@ -175,6 +175,10 @@ public class FibonacciHeap
 
     	public int key;
 
+       private int rank;
+       private boolean mark;
+       private HeapNode child, next, prev, parent;
+
     	public HeapNode(int key) {
     		this.key = key;
     	}
