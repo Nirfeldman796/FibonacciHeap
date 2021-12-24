@@ -6,9 +6,9 @@
 public class FibonacciHeap
 {
 
-    private HeapNode min;
-    private int size = 0;
-    //private int cnt = 0;
+    private HeapNode first, min;
+    private int size, numMark, numTrees;
+    static int numLinks, numCuts;
 
    /**
     * public boolean isEmpty()
@@ -17,7 +17,7 @@ public class FibonacciHeap
     *   
     */
     public boolean isEmpty() {
-    	return min == null;
+    	return this.first == null;
     }
 		
    /**
@@ -33,16 +33,26 @@ public class FibonacciHeap
     	return new HeapNode(key); // should be replaced by student code
     }
 
+    /**
+     * private void connectBrothers(HeapNode a, HeapNode b)
+     *
+     * Gets two nodes (a and b) and connects between them.
+     *
+     */
+
+    private void connectBrothers (HeapNode a, HeapNode b) { //O(1)
+        a.setNext(b);
+        b.setPrev(a);
+    }
+
    /**
     * public void deleteMin()
     *
     * Deletes the node containing the minimum key.
     *
     */
-    public void deleteMin()
-    {
-     	return; // should be replaced by student code
-     	
+    public void deleteMin() {
+        return; // should be replaced by student code
     }
 
    /**
@@ -51,7 +61,7 @@ public class FibonacciHeap
     * Returns the node of the heap whose key is minimal, or null if the heap is empty.
     *
     */
-    public HeapNode findMin() { return min; }
+    public HeapNode findMin() { return this.min; }
     
    /**
     * public void meld (FibonacciHeap heap2)
@@ -72,7 +82,7 @@ public class FibonacciHeap
     */
     public int size()
     {
-    	return size;
+    	return this.size;
     }
     	
     /**
@@ -174,17 +184,79 @@ public class FibonacciHeap
     public static class HeapNode{
 
     	public int key;
-
-       private int rank;
-       private boolean mark;
-       private HeapNode child, next, prev, parent;
+        public HeapNode info;
+        private int rank;
+        private boolean mark;
+        private HeapNode child, next, prev, parent;
 
     	public HeapNode(int key) {
-    		this.key = key;
+    	    this.key = key;
+            this.rank = 0;
+            this.mark = false;
+            this.next = this;
+            this.prev = this;
     	}
 
     	public int getKey() {
     		return this.key;
     	}
+
+        public void setKey(int key) {
+           this.key = key;
+       }
+
+        public HeapNode getInfo() {
+           return this.info;
+       }
+
+        public void setInfo(HeapNode info) {
+           this.info = info;
+       }
+
+        public int getRank() {
+           return this.rank;
+       }
+
+        public void setRank(int rank) {
+           this.rank = rank;
+       }
+
+        public boolean getMark() {
+           return this.mark;
+       }
+
+        public void setMark(boolean mark) {
+           this.mark = mark;
+       }
+
+        public HeapNode getChild() { return this.child; }
+
+        public void setChild(HeapNode child) {
+           this.child = child;
+       }
+
+        public HeapNode getNext() {
+           return this.next;
+       }
+
+        public void setNext(HeapNode next) {
+           this.next = next;
+       }
+
+        public HeapNode getPrev() {
+           return this.prev;
+       }
+
+        public void setPrev(HeapNode prev) {
+           this.prev = prev;
+       }
+
+        public HeapNode getParent() {
+           return this.parent;
+       }
+
+        public void setParent(HeapNode parent) {
+           this.parent = parent;
+       }
     }
 }
