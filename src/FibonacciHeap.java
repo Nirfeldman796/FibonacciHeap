@@ -30,17 +30,18 @@ public class FibonacciHeap{
     public HeapNode insert(int key)
     {    
     	HeapNode nNode = new HeapNode(key);
-        if (isEmpty()) { // the heap is empty: first and min are null
+        if (this.isEmpty()) { // the heap is empty
             this.min = nNode;
             this.first = nNode;
         }
         else { // the heap is not empty
             addNewRoot(nNode);
-            if (min.key>nNode.key) // check if the new node has the smallest key
-                min = nNode;
+
+            if (min.key > nNode.key) // the new node has the smallest key
+                this.min = nNode;
         }
-        numTrees++;
-        size++;
+        this.numTrees++;
+        this.size++;
         return nNode;
     } // complexity - O(1) we are changing a constant number of pointers
 
@@ -51,8 +52,10 @@ public class FibonacciHeap{
      * @param node - the node to be inserted as a new node to a current heap(not empty)
      */
     public void addNewRoot(HeapNode node){
-        HeapNode second = first;
-        node.prev = second.prev;
+        HeapNode second = this.first;
+        HeapNode last = this.first.prev;
+        last.next = node;
+        node.prev = last;
         node.next = second;
         second.prev = node;
         this.first = node;
@@ -214,7 +217,7 @@ public class FibonacciHeap{
      * Builds the heap from the array we got from consolidating() func.
      *
      */
-    public void connectArray(HeapNode[] roots) {
+    public void connectArray(HeapNode[] roots) { // O(log n)
         this.numTrees = 0;
         HeapNode prev = null;
 
